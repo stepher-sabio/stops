@@ -1,0 +1,98 @@
+---
+title: "Stops"
+author: Stepher Sabio
+format: html
+execute: 
+  echo: false
+---
+
+
+```{r}
+#| message: false
+library(tidyverse)
+library(primer.data)
+library(tidymodels)
+library(broom)
+library(marginaleffects)
+library(tidytext)
+library(xtable)
+```
+
+```{r}
+#| cache: true
+#| message: false
+x <- stops |>
+  filter(race %in% c("black", "white")) |>
+  mutate(race = str_to_title(race), 
+         sex = str_to_title(sex))
+
+fit_stops <- linear_reg() |>
+    set_engine("lm") |>
+    fit(arrested ~ sex + race*zone, data = x)
+```
+
+```{r}
+plot_predictions(fit_stops$fit,
+                 newdata = "balanced",
+                 condition = c("zone", "race", "sex"),
+                 draw = FALSE) |> as_tibble() |> 
+  group_by(zone, sex) |>
+  mutate(sort_order = estimate[race == "Black"]) |>
+  ungroup() |>
+  mutate(zone = reorder_within(zone, sort_order, sex)) |>
+  ggplot(aes(x = zone, 
+             color = race)) +
+  geom_errorbar(aes(ymin = conf.low, 
+                    ymax = conf.high), 
+                width = 0.2,
+                position = position_dodge(width = 0.5)) +
+  geom_point(aes(y = estimate), 
+             size = 1, 
+             position = position_dodge(width = 0.5)) +
+  facet_wrap(~ sex, scales = "free_x") +
+  scale_x_reordered() +
+  theme(axis.text.x = element_text(size = 8)) +
+  scale_y_continuous(labels = percent_format())
+```
+
+Ensuring fairness and impartiality in law enforcement is critical, especially when outcomes like arrests may be influenced by personal characteristics such as race. Drawing on data from roughly 400,000 traffic stops in New Orleans collected by the Stanford Open Policing Project, this study examines how disparities in arrest rates between Black and White drivers vary by location and time of day.
+
+$$
+P(Y = 1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n)}}
+$$
+
+\begin{align*}
+\hat{\text{arrested}} =\ &amp; 0.177 
++ 0.0614 \cdot \text{sexMale}
+- 0.0445 \cdot \text{raceWhite} \\
+&amp;+ 0.0146 \cdot \text{zoneB}
++ 0.00610 \cdot \text{zoneC}
++ 0.0781 \cdot \text{zoneD} \\
+&amp;+ 0.00190 \cdot \text{zoneE}
+- 0.00271 \cdot \text{zoneF}
++ 0.0309 \cdot \text{zoneG}
++ 0.0757 \cdot \text{zoneH}
+\end{align*}
+
+
+```{r}
+model_tidy <- fit_stops |> tidy(conf.int = TRUE)
+
+model_tidy |>
+  select(term, estimate, conf.low, conf.high) |>
+  mutate(
+    estimate = round(estimate, 3),
+    conf.low = round(conf.low, 3),
+    conf.high = round(conf.high, 3),
+    # Create a nice confidence interval column
+    `95% CI` = paste0("(", conf.low, ", ", conf.high, ")")
+  ) |>
+  select(term, estimate, `95% CI`) |>
+  knitr::kable(
+    col.names = c("Variable", "Estimate", "95% Confidence Interval"),
+    caption = "Logistic Regression Results: Predicting Arrest Probability",
+    align = c("l", "c", "c"),
+    format = "html",
+    table.attr = "style='width:70%; margin:auto;'"
+  )
+```
