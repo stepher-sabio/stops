@@ -99,6 +99,16 @@ window.Quarto = {
 </header>
 
 
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stops_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ensuring fairness and impartiality in law enforcement is critical, especially when outcomes like arrests may be influenced by personal characteristics such as race. Drawing on data from roughly 400,000 traffic stops in New Orleans collected by the Stanford Open Policing Project, this study examines how disparities in arrest rates between Black and White drivers vary by location and time of day.</p>
 <p><span class="math display">\[
 P(Y = 1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n)}}
 \]</span></p>
@@ -115,30 +125,274 @@ P(Y = 1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \bet
 + 0.0757 \cdot \text{zoneH}
 \end{align*}\]</span></p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 51 × 7
-   term        estimate std.error statistic  p.value conf.low conf.high
-   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
- 1 (Intercept)  0.177     0.00346    51.3   0         0.171     0.184  
- 2 sexMale      0.0614    0.00149    41.4   0         0.0585    0.0644 
- 3 raceWhite   -0.0445    0.00634    -7.02  2.25e-12 -0.0570   -0.0321 
- 4 zoneB        0.0146    0.00513     2.85  4.42e- 3  0.00455   0.0247 
- 5 zoneC        0.00610   0.00426     1.43  1.52e- 1 -0.00225   0.0145 
- 6 zoneD        0.0781    0.00418    18.7   6.20e-78  0.0699    0.0862 
- 7 zoneE        0.00190   0.00465     0.409 6.82e- 1 -0.00721   0.0110 
- 8 zoneF       -0.00271   0.00483    -0.561 5.75e- 1 -0.0122    0.00675
- 9 zoneG        0.0309    0.00500     6.18  6.46e-10  0.0211    0.0407 
-10 zoneH        0.0757    0.00479    15.8   3.42e-56  0.0663    0.0851 
-# ℹ 41 more rows</code></pre>
-</div>
-</div>
-<div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stops_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Logistic Regression Results: Predicting Arrest Probability</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variable</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Estimate</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">95% Confidence Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: center;">0.177</td>
+<td style="text-align: center;">(0.171, 0.184)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexMale</td>
+<td style="text-align: center;">0.061</td>
+<td style="text-align: center;">(0.059, 0.064)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite</td>
+<td style="text-align: center;">-0.045</td>
+<td style="text-align: center;">(-0.057, -0.032)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneB</td>
+<td style="text-align: center;">0.015</td>
+<td style="text-align: center;">(0.005, 0.025)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneC</td>
+<td style="text-align: center;">0.006</td>
+<td style="text-align: center;">(-0.002, 0.014)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneD</td>
+<td style="text-align: center;">0.078</td>
+<td style="text-align: center;">(0.07, 0.086)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneE</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">(-0.007, 0.011)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneF</td>
+<td style="text-align: center;">-0.003</td>
+<td style="text-align: center;">(-0.012, 0.007)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneG</td>
+<td style="text-align: center;">0.031</td>
+<td style="text-align: center;">(0.021, 0.041)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneH</td>
+<td style="text-align: center;">0.076</td>
+<td style="text-align: center;">(0.066, 0.085)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneI</td>
+<td style="text-align: center;">0.033</td>
+<td style="text-align: center;">(0.025, 0.041)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneJ</td>
+<td style="text-align: center;">0.024</td>
+<td style="text-align: center;">(0.014, 0.033)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneK</td>
+<td style="text-align: center;">0.059</td>
+<td style="text-align: center;">(0.049, 0.068)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneL</td>
+<td style="text-align: center;">-0.004</td>
+<td style="text-align: center;">(-0.014, 0.006)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneM</td>
+<td style="text-align: center;">0.039</td>
+<td style="text-align: center;">(0.028, 0.05)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneN</td>
+<td style="text-align: center;">0.014</td>
+<td style="text-align: center;">(-0.002, 0.03)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneO</td>
+<td style="text-align: center;">0.023</td>
+<td style="text-align: center;">(0.01, 0.036)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneP</td>
+<td style="text-align: center;">0.014</td>
+<td style="text-align: center;">(-0.001, 0.029)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneQ</td>
+<td style="text-align: center;">0.013</td>
+<td style="text-align: center;">(0.002, 0.023)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneR</td>
+<td style="text-align: center;">0.012</td>
+<td style="text-align: center;">(0, 0.024)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneS</td>
+<td style="text-align: center;">0.059</td>
+<td style="text-align: center;">(0.045, 0.074)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneT</td>
+<td style="text-align: center;">0.011</td>
+<td style="text-align: center;">(0, 0.022)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneU</td>
+<td style="text-align: center;">0.007</td>
+<td style="text-align: center;">(-0.003, 0.017)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneV</td>
+<td style="text-align: center;">0.077</td>
+<td style="text-align: center;">(0.06, 0.094)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneW</td>
+<td style="text-align: center;">0.114</td>
+<td style="text-align: center;">(0.081, 0.148)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zoneX</td>
+<td style="text-align: center;">0.006</td>
+<td style="text-align: center;">(-0.008, 0.019)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">zoneY</td>
+<td style="text-align: center;">0.039</td>
+<td style="text-align: center;">(0.022, 0.055)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneB</td>
+<td style="text-align: center;">-0.008</td>
+<td style="text-align: center;">(-0.026, 0.01)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneC</td>
+<td style="text-align: center;">0.007</td>
+<td style="text-align: center;">(-0.009, 0.022)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneD</td>
+<td style="text-align: center;">0.029</td>
+<td style="text-align: center;">(0.015, 0.044)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneE</td>
+<td style="text-align: center;">0.007</td>
+<td style="text-align: center;">(-0.009, 0.023)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneF</td>
+<td style="text-align: center;">-0.014</td>
+<td style="text-align: center;">(-0.031, 0.003)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneG</td>
+<td style="text-align: center;">0.009</td>
+<td style="text-align: center;">(-0.009, 0.027)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneH</td>
+<td style="text-align: center;">0.009</td>
+<td style="text-align: center;">(-0.01, 0.027)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneI</td>
+<td style="text-align: center;">-0.034</td>
+<td style="text-align: center;">(-0.051, -0.017)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneJ</td>
+<td style="text-align: center;">-0.024</td>
+<td style="text-align: center;">(-0.044, -0.005)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneK</td>
+<td style="text-align: center;">-0.038</td>
+<td style="text-align: center;">(-0.058, -0.018)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneL</td>
+<td style="text-align: center;">-0.008</td>
+<td style="text-align: center;">(-0.027, 0.012)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneM</td>
+<td style="text-align: center;">-0.042</td>
+<td style="text-align: center;">(-0.064, -0.02)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneN</td>
+<td style="text-align: center;">-0.057</td>
+<td style="text-align: center;">(-0.084, -0.029)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneO</td>
+<td style="text-align: center;">-0.015</td>
+<td style="text-align: center;">(-0.046, 0.016)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneP</td>
+<td style="text-align: center;">0.009</td>
+<td style="text-align: center;">(-0.022, 0.041)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneQ</td>
+<td style="text-align: center;">-0.054</td>
+<td style="text-align: center;">(-0.078, -0.031)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneR</td>
+<td style="text-align: center;">-0.038</td>
+<td style="text-align: center;">(-0.072, -0.004)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneS</td>
+<td style="text-align: center;">-0.025</td>
+<td style="text-align: center;">(-0.063, 0.013)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneT</td>
+<td style="text-align: center;">-0.027</td>
+<td style="text-align: center;">(-0.051, -0.003)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneU</td>
+<td style="text-align: center;">0.038</td>
+<td style="text-align: center;">(0.014, 0.063)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneV</td>
+<td style="text-align: center;">-0.039</td>
+<td style="text-align: center;">(-0.079, 0.001)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneW</td>
+<td style="text-align: center;">-0.123</td>
+<td style="text-align: center;">(-0.232, -0.014)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raceWhite:zoneX</td>
+<td style="text-align: center;">0.084</td>
+<td style="text-align: center;">(0.052, 0.116)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raceWhite:zoneY</td>
+<td style="text-align: center;">0.000</td>
+<td style="text-align: center;">(-0.041, 0.041)</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
